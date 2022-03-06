@@ -69,14 +69,15 @@ exports.createNewTodo = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-    }
-}
+    };
+};
 
 // PATCH Todo
 exports.updateTodo = async (req, res) => {
     try {
-        const { id, status } = req.params;
-        const data = filterObj(req.body, 'content');
+        const { id } = req.params;
+        //const data = filterObj(req.body, 'content');
+        const { content } = req.body;
 
         const todo = await Todo.findOne({
             where: { id, status: 'active' }
@@ -90,7 +91,7 @@ exports.updateTodo = async (req, res) => {
             return;
         }
 
-        await todo.post.update({ ...data });
+        await todo.update({ ...content });
         res.status(204).json({ status:'success' })
 
     } catch (error) {
@@ -101,7 +102,7 @@ exports.updateTodo = async (req, res) => {
 // DELETE Todo
 exports.deleteTodo = async (req, res) => {
     try {
-        const { id } = req.body;
+        const { id } = req.params;
         const todo = await Todo.findOne({ where: { id: id } });
 
         if(!todo) {
@@ -112,7 +113,7 @@ exports.deleteTodo = async (req, res) => {
             return;
         }
 
-        await Todo.update({ status: 'deleted' });
+        await todo.update({ status: 'deleted' });
 
         res.status(204).json({ status: 'success' });
 

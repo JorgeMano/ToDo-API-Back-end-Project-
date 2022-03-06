@@ -7,8 +7,8 @@ const TodoList = ({ items, onEditTodo, onDeleteTodo }) => {
 	return (
 		<div className={classes.list}>
 			{/* Render list of todos */}
-			{items.length > 0 &&
-				items.map(({ id, content }) => (
+			{items.data?.todos.length > 0 &&
+				items.data?.todos.map(({ id, content }) => (
 					<TodoItem
 						key={id}
 						id={id}
