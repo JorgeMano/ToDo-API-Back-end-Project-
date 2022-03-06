@@ -4,9 +4,11 @@
 	align-items: center;
 	justify-content: space-around;
 
-	width: 80%;
+	width: 50%;
 	margin: 0 auto;
+	margin-top: 70px;
 	border: 2px solid white;
+	border-radius: 30px;
 	padding: 10px 20px;
 }
 
@@ -18,7 +20,7 @@
 }
 
 .form__label {
-	color: white;
+	color: rgb(255, 255, 255);
 	font-size: 20px;
 	font-weight: bold;
 }

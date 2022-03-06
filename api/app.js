@@ -1,19 +1,45 @@
-// Create server Express
+const express = require('express');
+const { Sequelize} = require('sequelize');
+const cors = require('cors');
+//Model
+const { Todo } = require('./models/todo.model');
+//Router
+const { todosRouter } = require('./routes/todo.routes');
+//Util - database
+const { sequelize } = require('./util/database');
 
-// Define endpoint for ToDos
-// GET fetch all ToDos
-// POST Create new ToDo
-// PATCH Update ToDo given an ID
-// DELETE Delete ToDo given an ID (destroy or soft delete)
+// Init express APP
 
-// Establish a connection with a Database (Postgress)
+const app = express();
 
-// Create ToDo model
-// Use the model to interact with the controller functions
+app.use(express.json());
 
-// Must structure project with routes, controllers and models folders (utils)
+app.use(cors());
+/*
+var whitelist = ['http://localhost:4000']
 
-// IMPORTANT: Prettier format
+var corsOptions = {
+    origin: function (origin, callback) {
+        if(whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+}
+*/
+app.use('/api/v1/todos', todosRouter);
 
-// Install cors library (npm i cors)
-// app.use(cors())
+sequelize
+    .authenticate()
+    .then(() => console.log('Database authenticated'))
+    .catch((err) => console.log(err))
+
+sequelize 
+    .sync()
+    .then(() => console.log('Database synced'))
+    .catch((err) => console.log(err))
+
+app.listen(4000, () => {
+    console.log('Express app running');
+});
