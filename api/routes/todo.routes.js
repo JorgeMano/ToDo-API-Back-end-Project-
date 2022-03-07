@@ -1,11 +1,11 @@
 const express = require('express');
 // Controllers
 const {
-    getAllTodos,
-    getTodoById,
-    createNewTodo,
-    updateTodo,
-    deleteTodo,
+  getAllTodos,
+  getTodoById,
+  createNewTodo,
+  updateTodo,
+  deleteTodo
 } = require('../controllers/todo.controller');
 
 const router = express.Router();
@@ -15,9 +15,8 @@ router.get('/', getAllTodos);
 router.get('/:id', getTodoById);
 //POST
 router.post('/', createNewTodo),
-//PACTH
-router.patch('/:id', updateTodo),
-//DELETE
-router.delete('/:id', deleteTodo),
-
-module.exports = { todosRouter: router };
+  //PACTH
+  router.patch('/:id', updateTodo),
+  //DELETE
+  router.delete('/:id', deleteTodo),
+  (module.exports = { todosRouter: router });

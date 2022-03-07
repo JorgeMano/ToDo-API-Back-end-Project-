@@ -1,5 +1,5 @@
 const express = require('express');
-const { Sequelize} = require('sequelize');
+const { Sequelize } = require('sequelize');
 const cors = require('cors');
 //Model
 const { Todo } = require('./models/todo.model');
@@ -19,15 +19,15 @@ app.use(cors());
 app.use('/api/v1/todos', todosRouter);
 
 sequelize
-    .authenticate()
-    .then(() => console.log('Database authenticated'))
-    .catch((err) => console.log(err))
+  .authenticate()
+  .then(() => console.log('Database authenticated'))
+  .catch((err) => console.log(err));
 
-sequelize 
-    .sync()
-    .then(() => console.log('Database synced'))
-    .catch((err) => console.log(err))
+sequelize
+  .sync()
+  .then(() => console.log('Database synced'))
+  .catch((err) => console.log(err));
 
 app.listen(4000, () => {
-    console.log('Express app running');
+  console.log('Express app running');
 });
